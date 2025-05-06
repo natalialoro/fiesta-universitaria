@@ -1,12 +1,3 @@
 {
-  "inscripciones": [
-    {
-      "id": "163b",
-      "nombre": "ddd",
-      "correo": "ejemplo@universidad.edu.co",
-      "semestre": "2",
-      "acompanante": false,
-      "terminos": true
-    }
-  ]
+  "inscripciones": []
 }
