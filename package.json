@@ -2,13 +2,14 @@
   "name": "fiesta-universitaria",
   "version": "0.1.0",
   "private": true,
+  
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "json-server": "json-server --watch db.json --port 5000"
-  },
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start",
+  "lint": "next lint",
+  "json-server": "json-server --watch db.json --port 5000"
+},
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
     "next": "15.3.1",

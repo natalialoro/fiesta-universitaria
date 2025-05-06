@@ -3,13 +3,15 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
+import { enviarInscripcion } from '../services/inscripcionesService';
 
 const schema = z.object({
   nombre: z.string().min(1, "El nombre es obligatorio"),
   correo: z.string().email("Correo inválido ejemplo@correo.edu.co").endsWith(".edu.co", "Debe ser un correo institucional .edu.co"),
-  semestre: z
-    .union([z.string().regex(/^(10|[1-9])$/, "Debe ser un número entre 1 y 10"), z.literal("")])
-    .optional(),
+  semestre: z.union([
+    z.string().regex(/^(10|[1-9])$/, "Debe ser un número entre 1 y 10"),
+    z.literal("")
+  ]).optional(),
   acompanante: z.boolean().optional(),
   nombreAcompanante: z.string().optional(),
   terminos: z.literal(true, {
@@ -40,9 +42,13 @@ export default function Home() {
   const vieneConAcompanante = watch("acompanante");
   const [enviado, setEnviado] = useState(false);
 
-  const onSubmit = (data: FormData) => {
-    console.log("Formulario enviado:", data);
-    setEnviado(true);
+  const onSubmit = async (data: FormData) => {
+    try {
+      await enviarInscripcion(data);
+      setEnviado(true);
+    } catch (error) {
+      alert("Hubo un error al enviar la inscripción");
+    }
   };
 
   return (
