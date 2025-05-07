@@ -1,10 +1,16 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { Inscripcion } from '@/types/inscripcion';
 
 const InscripcionForm = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
-  
-  const onSubmit = (data: any) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm<Inscripcion>();
+
+  const onSubmit = (data: Inscripcion) => {
     fetch('http://localhost:5000/inscripciones', {
       method: 'POST',
       headers: {
@@ -12,10 +18,12 @@ const InscripcionForm = () => {
       },
       body: JSON.stringify(data),
     })
-    .then(response => response.json())
-    .then(data => console.log('Formulario enviado:', data))
-    .catch(error => console.error('Error:', error));
+      .then((response) => response.json())
+      .then((data) => console.log('Formulario enviado:', data))
+      .catch((error) => console.error('Error:', error));
   };
+
+  const mostrarAcompanante = watch('acompanante');
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="p-4 space-y-4">
@@ -27,7 +35,7 @@ const InscripcionForm = () => {
           {...register('nombre', { required: 'Este campo es obligatorio' })}
           className="w-full p-2 border border-gray-300 rounded"
         />
-        {errors.nombre && <p className="text-red-500">{errors.nombre.message}</p>}
+        {errors.nombre?.message && <p className="text-red-500">{errors.nombre.message}</p>}
       </div>
 
       <div>
@@ -44,7 +52,7 @@ const InscripcionForm = () => {
           })}
           className="w-full p-2 border border-gray-300 rounded"
         />
-        {errors.correo && <p className="text-red-500">{errors.correo.message}</p>}
+        {errors.correo?.message && <p className="text-red-500">{errors.correo.message}</p>}
       </div>
 
       <div>
@@ -52,10 +60,10 @@ const InscripcionForm = () => {
         <input
           id="semestre"
           type="number"
-          {...register('semestre', { min: 1, max: 10 })}
+          {...register('semestre')}
           className="w-full p-2 border border-gray-300 rounded"
         />
-        {errors.semestre && <p className="text-red-500">El semestre debe estar entre 1 y 10</p>}
+        {errors.semestre?.message && <p className="text-red-500">{errors.semestre.message}</p>}
       </div>
 
       <div>
@@ -67,16 +75,19 @@ const InscripcionForm = () => {
           />
           ¿Vienes con acompañante?
         </label>
-        {watch('acompanante') && (
+
+        {mostrarAcompanante && (
           <div>
-            <label htmlFor="acompananteNombre" className="block">Nombre del acompañante</label>
+            <label htmlFor="nombreAcompanante" className="block">Nombre del acompañante</label>
             <input
-              id="acompananteNombre"
+              id="nombreAcompanante"
               type="text"
-              {...register('acompananteNombre', { required: 'Este campo es obligatorio' })}
+              {...register('nombreAcompanante', {
+                required: mostrarAcompanante ? 'Este campo es obligatorio' : false,
+              })}
               className="w-full p-2 border border-gray-300 rounded"
             />
-            {errors.acompananteNombre && <p className="text-red-500">{errors.acompananteNombre.message}</p>}
+            {errors.nombreAcompanante?.message && <p className="text-red-500">{errors.nombreAcompanante.message}</p>}
           </div>
         )}
       </div>
@@ -90,7 +101,7 @@ const InscripcionForm = () => {
           />
           Acepto los términos y condiciones
         </label>
-        {errors.terminos && <p className="text-red-500">{errors.terminos.message}</p>}
+        {errors.terminos?.message && <p className="text-red-500">{errors.terminos.message}</p>}
       </div>
 
       <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded">Enviar</button>

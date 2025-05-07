@@ -2,8 +2,9 @@
 
 import { createContext, useContext, useEffect, useState } from 'react';
 import { Inscripcion } from '@/types/inscripcion';
-import { guardarInscripcion, obtenerInscripciones } from '@/db/indexedDB';
-import { enviarInscripcion } from '@/services/inscripcionesService';
+import { guardarInscripcion } from '@/db/indexedDB';
+import { enviarInscripcion, obtenerInscripcionesDesdeBackend } from '@/services/inscripcionesService';
+
 
 interface InscripcionesContextType {
   inscripciones: Inscripcion[];
@@ -18,11 +19,16 @@ export const InscripcionesProvider = ({ children }: { children: React.ReactNode 
 
   useEffect(() => {
     const cargarInscripciones = async () => {
-      const data = await obtenerInscripciones();
-      setInscripciones(data);
+      try {
+        const data = await obtenerInscripcionesDesdeBackend();
+        setInscripciones(data);
+      } catch (error) {
+        console.error('Error cargando inscripciones desde el backend:', error);
+      }
     };
     cargarInscripciones();
   }, []);
+  
 
   const agregarInscripcion = async (inscripcion: Omit<Inscripcion, 'id'>) => {
     const inscripcionConId: Inscripcion = {
