@@ -1,7 +1,7 @@
-## Fiesta Universitaria 🎉 - Formulario de Inscripción
+# Fiesta Universitaria 🎉 - Formulario de Inscripción
 Este proyecto es una aplicación que permite registrar inscripciones para una fiesta universitaria.
 
-# Tecnologías utilizadas
+## Tecnologías utilizadas
 
 Next.js
 
@@ -17,17 +17,17 @@ Context API
 
 IndexedDB
 
-## Cómo ejecutar el proyecto
+# Cómo ejecutar el proyecto
 
-# Primero, instala las dependencias:
+## Primero, instala las dependencias:
 
 npm install
 
-# Inicia el servidor de desarrollo:
+## Inicia el servidor de desarrollo:
 
 npm run dev
 
-# Levantar el backend simulado con json-server:
+## Levantar el backend simulado con json-server:
 
 npx json-server --watch db.json --port 5000
 
