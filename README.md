@@ -33,4 +33,4 @@ La aplicación estará disponible en http://localhost:3000
 
 En otra parte de la terminal
 npx json-server --watch db.json --port 5000
-Esto levantará el backend simulado en http://localhost:5000/inscripciones.
+esto levantará el backend simulado en http://localhost:5000/inscripciones.
