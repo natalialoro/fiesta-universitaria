@@ -26,6 +26,7 @@ npm install
 ## Inicia el servidor de desarrollo:
 
 En la terminal principal
+
 npm run dev
 
 La aplicación estará disponible en http://localhost:3000
@@ -33,6 +34,7 @@ La aplicación estará disponible en http://localhost:3000
 ## Levantar el backend simulado con json-server:
 
 En otra parte de la terminal
+
 npx json-server --watch db.json --port 5000
 
 Esto levantará el backend simulado en http://localhost:5000/inscripciones.
