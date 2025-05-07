@@ -1,23 +1,14 @@
 import { openDB } from 'idb';
+import { Inscripcion } from '@/types/inscripcion';
 
 const DB_NAME = 'FiestaDB';
 const STORE_NAME = 'inscripciones';
-
-export interface Inscripcion {
-  id?: number;
-  nombre: string;
-  correo: string;
-  semestre?: string;
-  acompanante?: boolean;
-  nombreAcompanante?: string;
-  terminos: boolean;
-}
 
 export async function initDB() {
   return openDB(DB_NAME, 1, {
     upgrade(db) {
       if (!db.objectStoreNames.contains(STORE_NAME)) {
-        db.createObjectStore(STORE_NAME, { keyPath: 'id', autoIncrement: true });
+        db.createObjectStore(STORE_NAME, { keyPath: 'id' });
       }
     },
   });
@@ -25,7 +16,7 @@ export async function initDB() {
 
 export async function guardarInscripcion(data: Inscripcion): Promise<void> {
   const db = await initDB();
-  await db.add(STORE_NAME, data);
+  await db.put(STORE_NAME, data);
 }
 
 export async function obtenerInscripciones(): Promise<Inscripcion[]> {

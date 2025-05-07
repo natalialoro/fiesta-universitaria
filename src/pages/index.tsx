@@ -19,21 +19,16 @@ const schema = z.object({
   }),
 }).refine((data) => {
   if (data.acompanante) {
-    return typeof data.nombreAcompanante === 'string' && data.nombreAcompanante.trim().length > 0;
+    return data.nombreAcompanante && data.nombreAcompanante.trim().length > 0;
   }
   return true;
 }, {
   message: "El nombre del acompañante es obligatorio",
   path: ["nombreAcompanante"],
 });
-
 type FormData = z.infer<typeof schema>;
 
 export default function Home() {
-  // Verificación de useInscripciones()
-  const { agregarInscripcion } = useInscripciones() || {}; // Esto evitará que falle si el contexto no está disponible
-  const [enviado, setEnviado] = useState(false);
-
   const {
     register,
     handleSubmit,
@@ -44,18 +39,22 @@ export default function Home() {
   });
 
   const vieneConAcompanante = watch("acompanante");
+  const [enviado, setEnviado] = useState(false);
+
+  const { agregarInscripcion } = useInscripciones()!;
 
   const onSubmit = async (data: FormData) => {
-    if (!agregarInscripcion) {
-      console.error('El contexto de inscripciones no está disponible');
-      return;
-    }
+    const inscripcion = {
+      ...data,
+      acompanante: data.acompanante ?? false,
+      semestre: data.semestre || "",
+    };
 
     try {
-      await agregarInscripcion(data);
+      await agregarInscripcion(inscripcion);
       setEnviado(true);
     } catch (error) {
-      console.error('Error al guardar inscripción:', error);
+      console.error('Error al enviar inscripción:', error);
     }
   };
 

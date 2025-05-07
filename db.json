@@ -1,3 +1,61 @@
 {
-  "inscripciones": []
+  "inscripciones": [
+    {
+      "id": "2ac8",
+      "nombre": "dd",
+      "correo": "ejemplo@universidad.edu.co",
+      "semestre": "2",
+      "acompanante": false,
+      "terminos": true
+    },
+    {
+      "id": "e800",
+      "nombre": "Natalia",
+      "correo": "ejemplo@universidad.edu.co",
+      "semestre": "3",
+      "acompanante": false,
+      "terminos": true
+    },
+    {
+      "id": "ef22",
+      "nombre": "ddd",
+      "correo": "ejemplo@universidad.edu.co",
+      "semestre": "2",
+      "acompanante": false,
+      "terminos": true
+    },
+    {
+      "id": "4bf2",
+      "nombre": "Santiago",
+      "correo": "ejemplo@universidad.edu.co",
+      "semestre": "3",
+      "acompanante": true,
+      "nombreAcompanante": "Natalia",
+      "terminos": true
+    },
+    {
+      "id": "490d0d12-2a26-402d-872b-c1aefb20c33d",
+      "nombre": "fff",
+      "correo": "ejemplo@universidad.edu.co",
+      "semestre": "2",
+      "acompanante": false,
+      "terminos": true
+    },
+    {
+      "id": "1e2d52d0-8af7-4b54-9712-6400a2c2a14f",
+      "nombre": "Santiago",
+      "correo": "ejemplo@universidad.edu.co",
+      "semestre": "2",
+      "acompanante": false,
+      "terminos": true
+    },
+    {
+      "id": "ead909ee-be75-41c5-9aa2-0b38575b1614",
+      "nombre": "Natalia",
+      "correo": "ejemplo@universidad.edu.co",
+      "semestre": "2",
+      "acompanante": false,
+      "terminos": true
+    }
+  ]
 }
